@@ -9,8 +9,6 @@ import configmanager
 import testcenter
 import operation
 
-#MAIN_WINDOW_WIDTH=915
-#MAIN_WINDOW_HEIGHT=614
 MAIN_WINDOW_WIDTH=850
 MAIN_WINDOW_HEIGHT=600
 
@@ -114,14 +112,11 @@ class Gospel(gtk.Window):
 		self.show_box=gtk.VBox(True,0)
 		self.vbox.pack_start(self.show_box,True,True,0)
 
-		#self.softbox=softcenter.SoftCenter().vbox
 		self.softbox=softcenter.SoftCenter()
 		self.show_box.pack_start(self.softbox,True,True,0)
 
-		#self.deploybox=deploy.Deploy().vbox
 		self.deploybox=deploy.DeployCenter()
 		self.show_box.pack_start(self.deploybox,True,True,0)
-		#self.set_focus(self.toolbar)
 
 		self.configmanager=configmanager.ConfigManager()
 		self.show_box.pack_start(self.configmanager,True,True,0)
