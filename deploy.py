@@ -73,7 +73,7 @@ class DeployCenter(gtk.VBox):
 		column=gtk.TreeViewColumn("任务名称",rendererText,text=1)
 		column.set_resizable(True)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-		column.set_fixed_width(160)
+		column.set_fixed_width(200)
 		self.treeview.append_column(column)
 	
 		#rendererText=gtk.CellRendererText()
@@ -86,13 +86,15 @@ class DeployCenter(gtk.VBox):
 		rendererText=gtk.CellRendererText()
 		column=gtk.TreeViewColumn("服务器",rendererText,text=3)
 		column.set_resizable(True)
+		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+		column.set_fixed_width(190)
 		self.treeview.append_column(column)
 	
 		rendererText=gtk.CellRendererCombo()
 		column=gtk.TreeViewColumn("角色",rendererText,text=4)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 		column.set_resizable(True)
-		column.set_fixed_width(178)
+		column.set_fixed_width(175)
 		self.treeview.append_column(column)
 
 		rendererText=gtk.CellRendererText()
@@ -101,15 +103,18 @@ class DeployCenter(gtk.VBox):
 		self.treeview.append_column(column)
 	
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("部署进度",rendererText,text=6)
+		column=gtk.TreeViewColumn("部署状态",rendererText,text=6)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 		column.set_resizable(True)
-		column.set_fixed_width(210)
+		column.set_fixed_width(200)
 		self.treeview.append_column(column)
 
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("状态",rendererText,text=7)
-		column.set_visible(True)
+		column=gtk.TreeViewColumn("进度",rendererText,text=7)
+		column.set_alignment(0.5)
+		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+		column.set_resizable(True)
+		column.set_fixed_width(50)
 		self.treeview.append_column(column)
 
 

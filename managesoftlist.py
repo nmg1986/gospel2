@@ -13,9 +13,14 @@ class ManageSoftList():
 		def get_soft_list(self):
 			filename='package/list.server'
 			try:
-				urllib.urlretrieve(self.url,filename)
+				pass
+				#urllib.urlretrieve(self.url,filename)
 			except IOError:
 				print '无法连接服务器,请检查网络设置'
+				message=gtk.MessageDialog(type=gtk.MESSAGE_WARNING,buttons=gtk.BUTTONS_OK)
+				message.set_markup('警告:无法连接服务器,请检查网络设置!')
+				message.run()
+				message.destroy()
 				if os.path.isfile('package/list.server'):
 					parser=SafeConfigParser()
 					parser.read('package/list.server')
