@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 	 
 import gtk
-from newtask import NewTask 
+from addhost import  AddHost
 import util
 import os
 import sqlite3
@@ -11,7 +11,7 @@ import EditServer
 DEFAULT=0
 CUSTOM=1 
 
-class DeployCenter(gtk.VBox):
+class HostManage(gtk.VBox):
 	def __init__(self):
 		gtk.VBox.__init__(self)	
 
@@ -70,46 +70,33 @@ class DeployCenter(gtk.VBox):
 		self.treeview.append_column(column)
 	
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("任务名称",rendererText,text=1)
+		column=gtk.TreeViewColumn("IP地址",rendererText,text=1)
 		column.set_resizable(True)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 		column.set_fixed_width(160)
 		self.treeview.append_column(column)
 	
-		#rendererText=gtk.CellRendererText()
-		#column=gtk.TreeViewColumn("任务描述",rendererText,text=2)
-		#column.set_resizable(True)
-		#column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-		#column.set_fixed_width(236)
-		#self.treeview.append_column(column)
-
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("服务器",rendererText,text=3)
+		column=gtk.TreeViewColumn("SSH端口",rendererText,text=2)
 		column.set_resizable(True)
-		self.treeview.append_column(column)
-	
-		rendererText=gtk.CellRendererCombo()
-		column=gtk.TreeViewColumn("角色",rendererText,text=4)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
-		column.set_resizable(True)
-		column.set_fixed_width(178)
+		column.set_fixed_width(236)
 		self.treeview.append_column(column)
 
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("Flag",rendererText,text=5)
-		column.set_visible(False)
+		column=gtk.TreeViewColumn("用户名",rendererText,text=5)
+		column.set_resizable(True)
 		self.treeview.append_column(column)
 	
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("部署进度",rendererText,text=6)
+		column=gtk.TreeViewColumn("密码",rendererText,text=6)
 		column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
 		column.set_resizable(True)
 		column.set_fixed_width(210)
 		self.treeview.append_column(column)
 
 		rendererText=gtk.CellRendererText()
-		column=gtk.TreeViewColumn("状态",rendererText,text=7)
-		column.set_visible(True)
+		column=gtk.TreeViewColumn("连通检测",rendererText,text=7)
 		self.treeview.append_column(column)
 
 
@@ -124,7 +111,7 @@ class DeployCenter(gtk.VBox):
 
 	
 		fixed=gtk.Fixed()
-		self.install_button=gtk.Button("开始部署")
+		self.install_button=gtk.Button("开始检测")
 		self.install_button.set_size_request(100,25)
 		self.install_button.connect('clicked',self.start_install)
 		fixed.put(self.install_button,0,0)
@@ -171,7 +158,7 @@ class DeployCenter(gtk.VBox):
 		self.selection.select_path(path)
 		return
 	def add_server(self,widget):
-		win=NewTask(self.liststore)
+		win=AddHost(self.liststore)
 		return
 	def destroy_add(self,widget,data):
 		data.destroy()
@@ -288,7 +275,7 @@ class DeployCenter(gtk.VBox):
 		
 
 if __name__ == "__main__":
-	box=Deploy()
+	box=HostManage()
 	w=gtk.Window(gtk.WINDOW_TOPLEVEL)
 	w.set_size_request(1000,700)
 	w.add(box)

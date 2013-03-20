@@ -5,6 +5,7 @@ import gtk
 import softcenter
 import serverpool
 import deploy
+import hostmanage
 import configmanager
 import testcenter
 import operation
@@ -27,21 +28,25 @@ class Gospel(gtk.Window):
 		softaction.set_active(True)
 		softaction.connect('activate',self.soft_center)
 
-		deployaction=gtk.RadioAction('deploy','_安装部署','安装部署',None,1)
+		hostaction=gtk.RadioAction('config','_主机管理','主机管理',None,1)	
+		hostaction.set_group(softaction)
+		hostaction.connect('activate',self.host_manage)
+
+		deployaction=gtk.RadioAction('deploy','_安装部署','安装部署',None,2)
 		deployaction.set_group(softaction)
 		deployaction.connect('activate',self.deploy_center)
 
-		configaction=gtk.RadioAction('config','_配置中心','配置管理',None,2)	
-		configaction.set_group(softaction)
-		configaction.connect('activate',self.config_center)
+		#configaction=gtk.RadioAction('config','_配置中心','配置管理',None,2)	
+		#configaction.set_group(softaction)
+		#configaction.connect('activate',self.config_center)
 
-		testaction=gtk.RadioAction('test','_测试中心','测试中心',None,3)
-		testaction.set_group(softaction)
-		testaction.connect('activate',self.test_center)
+		#testaction=gtk.RadioAction('test','_测试中心','测试中心',None,3)
+		#testaction.set_group(softaction)
+		#testaction.connect('activate',self.test_center)
 
-		yunweiaction=gtk.RadioAction('yunwei','_运维中心','运维中心',None,4)
-		yunweiaction.set_group(softaction)
-		yunweiaction.connect('activate',self.yunwei_center)
+		#yunweiaction=gtk.RadioAction('yunwei','_运维中心','运维中心',None,4)
+		#yunweiaction.set_group(softaction)
+		#yunweiaction.connect('activate',self.yunwei_center)
 		
 
 		self.toolbar=gtk.Toolbar()
@@ -55,21 +60,25 @@ class Gospel(gtk.Window):
 		softitem.set_size_request(80,50)
 		self.toolbar.insert(softitem,-1)
 
+		hostitem=hostaction.create_tool_item()
+		hostitem.set_size_request(80,50)
+		self.toolbar.insert(hostitem,-1)
+
 		deployitem=deployaction.create_tool_item()
 		deployitem.set_size_request(80,50)
 		self.toolbar.insert(deployitem,-1)
 
-		configitem=configaction.create_tool_item()
-		configitem.set_size_request(80,50)
-		self.toolbar.insert(configitem,-1)
+		#configitem=configaction.create_tool_item()
+		#configitem.set_size_request(80,50)
+		#self.toolbar.insert(configitem,-1)
 
-		testitem=testaction.create_tool_item()
-		testitem.set_size_request(80,50)
-		self.toolbar.insert(testitem,-1)
+		#testitem=testaction.create_tool_item()
+		#testitem.set_size_request(80,50)
+		#self.toolbar.insert(testitem,-1)
 
-		yunweiitem=yunweiaction.create_tool_item()
-		yunweiitem.set_size_request(80,50)
-		self.toolbar.insert(yunweiitem,-1)
+		#yunweiitem=yunweiaction.create_tool_item()
+		#yunweiitem.set_size_request(80,50)
+		#self.toolbar.insert(yunweiitem,-1)
 
 
 
@@ -115,6 +124,9 @@ class Gospel(gtk.Window):
 		self.softbox=softcenter.SoftCenter()
 		self.show_box.pack_start(self.softbox,True,True,0)
 
+		self.hostbox=hostmanage.HostManage()
+		self.show_box.pack_start(self.hostbox,True,True,0)
+
 		self.deploybox=deploy.DeployCenter()
 		self.show_box.pack_start(self.deploybox,True,True,0)
 
@@ -145,6 +157,11 @@ class Gospel(gtk.Window):
 	def soft_center(self,action):
 		self.show_box.hide_all()
 		self.softbox.show_all()
+		self.show_box.show()
+		return
+	def host_manage(self,action):
+		self.show_box.hide_all()
+		self.hostbox.show_all()
 		self.show_box.show()
 		return
 	def deploy_center(self,action):
