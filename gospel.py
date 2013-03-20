@@ -28,14 +28,8 @@ class Gospel(gtk.Window):
 		softaction=gtk.RadioAction('soft','_软件仓库','软件仓库',None,0)
 		softaction.set_active(True)
 		softaction.connect('activate',self.soft_center)
-		#label=gtk.Image()
-		#label.set_from_file('icon/nginx.gif')
-		#softaction.connect_proxy(label)
-		#actiongroup.add_action(softaction)
-		#actiongroup.add_action(deployaction)
 
 		deployaction=gtk.RadioAction('deploy','_安装部署','安装部署',None,1)
-		#actiongroup.add_action(deployaction)
 		deployaction.set_group(softaction)
 		deployaction.connect('activate',self.deploy_center)
 
@@ -178,13 +172,6 @@ class Gospel(gtk.Window):
 		self.show_box.show()
 	def update_center(self,action):
 		pass
-	#def _remove(self):
-	#	children=self.show_box.get_children()
-	#	if children is not None:
-	#		for child in children:
-	#			#self.show_box.remove(child)
-	#			child.hide()
-	#	#self.show_box.hide_all()
 	def preferences(self,menuitem):
 		b=gtk.Builder()
 		b.add_from_file('xml/preferences.xml')
