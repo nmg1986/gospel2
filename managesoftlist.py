@@ -13,18 +13,16 @@ class ManageSoftList():
 		def get_soft_list(self):
 			filename='package/list.server'
 			try:
-				#pass
 				print '正在连接网络...'
 				urllib.urlretrieve(self.url,filename)
 				print '连接网络成功...'
 			except IOError:
 				print '无法连接服务器,请检查网络设置'
 				message=gtk.MessageDialog(flags=gtk.DIALOG_MODAL,type=gtk.MESSAGE_WARNING,buttons=gtk.BUTTONS_OK)
-				#message=gtk.MessageDialog(flags=gtk.DIALOG_MODAL,type=gtk.MESSAGE_WARNING)
 				message.set_markup('警告:无法连接服务器,请检查网络设置!')
 				message.show()
-				#message.run()
-				#message.destroy()
+				button=message.action_area.get_children()[0]
+				button.connect('clicked',self.destroy_msgbox,message)
 				if os.path.isfile('package/list.server'):
 					parser=SafeConfigParser()
 					parser.read('package/list.server')
@@ -69,6 +67,8 @@ class ManageSoftList():
 						size=serverparser.get(section,'size').strip("'")
 						version=serverparser.get(section,'version').strip("'")
 						self.liststore.append([False,name,desc,'---',version,size,'下载',1])
+		def destroy_msgbox(self,button,msgbox):
+			msgbox.destroy()
 		def flush_soft_list(self):
 			parser=SafeConfigParser()
 			parser.read('package/list.client')
