@@ -10,6 +10,9 @@ import configmanager
 import testcenter
 import operation
 
+import warnings
+warnings.filterwarnings(action='ignore', category=DeprecationWarning, module='randpool')
+
 MAIN_WINDOW_WIDTH=850
 MAIN_WINDOW_HEIGHT=600
 

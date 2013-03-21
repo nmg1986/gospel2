@@ -8,8 +8,18 @@ import managesoftlist
 import variables
 import multiprocessing
 import addsoft
+import threading
 
 PKG_DIR='package'
+
+class GenerateSoftList(threading.Thread):
+	def __init__(self,treemodel):
+		self.model=treemodel
+		threading.Thread.__init__(self)
+	def run(self):
+		msl=managesoftlist.ManageSoftList(self.model)
+		msl.get_soft_list()
+			
 class SoftCenter(gtk.VBox):
 		def __init__(self):
 			gtk.VBox.__init__(self)
@@ -132,8 +142,9 @@ class SoftCenter(gtk.VBox):
 		def fill_model(self,args):
 			managesoftlist.ManageSoftList(args).get_soft_list()
 		def _init_model(self): 			
-			msl=managesoftlist.ManageSoftList(self.liststore)
-			msl.get_soft_list()
+			T=GenerateSoftList(self.liststore)
+			T.setDaemon(True)
+			T.start()
 		def flush_model(self):
 			self.treeview.get_model().clear()
 			self._init_model()
