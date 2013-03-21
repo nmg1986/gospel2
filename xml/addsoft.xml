@@ -3,8 +3,8 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkFileChooserDialog" id="filechooserdialog">
-    <property name="width_request">570</property>
-    <property name="height_request">500</property>
+    <property name="width_request">450</property>
+    <property name="height_request">175</property>
     <property name="border_width">5</property>
     <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
@@ -30,9 +30,9 @@
               </packing>
             </child>
             <child>
-              <object class="GtkTextView" id="textview">
-                <property name="width_request">538</property>
-                <property name="height_request">80</property>
+              <object class="GtkEntry" id="entry">
+                <property name="width_request">475</property>
+                <property name="height_request">25</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>

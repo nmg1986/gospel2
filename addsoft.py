@@ -11,15 +11,19 @@ class AddSoft:
 		self.f=b.get_object('filechooserdialog')
 		self.f.set_position(gtk.WIN_POS_CENTER)
 		self.f.set_keep_above(True)
+		self.f.set_size_request(450,175)
 		
-		textview=b.get_object('textview')
-		textbuffer=gtk.TextBuffer()
-		textview.set_buffer(textbuffer)
+		#textview=b.get_object('textview')
+		#textbuffer=gtk.TextBuffer()
+		#textview.set_buffer(textbuffer)
+		entry=b.get_object('entry')
+		
 
 		add=b.get_object('add')
 		quit=b.get_object('quit')
 		
-		add.connect('clicked',self.add,textbuffer)
+		#add.connect('clicked',self.add,textbuffer)
+		add.connect('clicked',self.add,entry)
 		quit.connect('clicked',self.quit)
 		self.liststore=model
 	def show(self):
